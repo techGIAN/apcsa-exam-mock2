@@ -421,6 +421,7 @@ setInterval(() => {
    FINAL SUBMIT
 --------------------------------*/
 document.getElementById('submit-btn').addEventListener('click', async () => {
+  alert(localStorage.getItem("examToken"));
   const token = localStorage.getItem("examToken");
   if (!token) return alert('No valid token.');
 
@@ -442,7 +443,10 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
 
   const data = await res.json();
   if (data.ok) showToast("Submitted! You may still revise & resubmit until the time ends. Only the last submission counts!");
-  else alert('Submission failed: ' + (data.error || 'Unknown error'));
+  else {
+    // alert('Submission failed: ' + (data.error || 'Unknown error'));
+    alert('Submission failed: ' + token);
+  }
 });
 </script>
 </body>
