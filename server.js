@@ -110,14 +110,14 @@ app.post('/save', (req, res) => {
   if (!validTokens.has(token)) return res.json({ ok: false, error: 'Invalid token' });
 
   // Save submission to submissions.json
-  const submissionsFile = path.join(__dirname, 'submissions.json');
-  let submissions = [];
-  if (fs.existsSync(submissionsFile)) {
-    submissions = JSON.parse(fs.readFileSync(submissionsFile, 'utf8'));
+  const savesFile = path.join(__dirname, 'saves.json');
+  let saves = [];
+  if (fs.existsSync(savesFile)) {
+    saves = JSON.parse(fs.readFileSync(savesFile, 'utf8'));
   }
   const entry = { name, time: new Date().toISOString(), questions };
-  submissions.push(entry);
-  fs.writeFileSync(submissionsFile, JSON.stringify(submissions, null, 2));
+  saves.push(entry);
+  fs.writeFileSync(savesFile, JSON.stringify(saves, null, 2));
 
   res.json({ ok: true });
 });
