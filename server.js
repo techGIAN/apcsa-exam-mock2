@@ -104,7 +104,7 @@ app.get('/admin/download', (req, res) => {
   res.download(submissionsFile, 'submissions.json');
 });
 
-// Submit endpoint
+// Save endpoint
 app.post('/save', (req, res) => {
   const { token, name, questions } = req.body;
   if (!validTokens.has(token)) return res.json({ ok: false, error: 'Invalid token' });
@@ -124,9 +124,9 @@ app.post('/save', (req, res) => {
 
 // Admin endpoint to download saves.json
 app.get('/admin/download-saves', (req, res) => {
-  const submissionsFile = path.join(__dirname, 'saves.json');
-  if (!fs.existsSync(submissionsFile)) return res.status(404).send('No saved work yet');
-  res.download(submissionsFile, 'saves.json');
+  const savesFile = path.join(__dirname, 'saves.json');
+  if (!fs.existsSync(savesFile)) return res.status(404).send('No saved work yet');
+  res.download(savesFile, 'saves.json');
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -314,6 +314,7 @@ function updateCheckmarks() {
 // }
 
 async function saveWork(section) {
+  const token = localStorage.getItem("examToken");
   if (!token) return;
 
   const name = document.getElementById('student-name').value.trim();
@@ -340,6 +341,7 @@ async function saveWork(section) {
 
 /* ------------------ LOAD ------------------ */
 async function loadSavedWork() {
+  const token = localStorage.getItem("examToken");
   if (!token) return;
 
   const res = await fetch(`/get?token=${token}`);
@@ -419,6 +421,7 @@ setInterval(() => {
    FINAL SUBMIT
 --------------------------------*/
 document.getElementById('submit-btn').addEventListener('click', async () => {
+  const token = localStorage.getItem("examToken");
   if (!token) return alert('No valid token.');
 
   const name = document.getElementById('student-name').value.trim();
