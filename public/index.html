@@ -373,7 +373,8 @@ async function loadSavedWork() {
 window.addEventListener('DOMContentLoaded', async () => {
   while (!token) {
     const pwd = prompt('Enter exam password:');
-    if (pwd === null) continue;
+    // if (pwd === null) continue;
+    if (!token || pwd === null) continue;
 
     const res = await fetch('/verify-password', {
       method: 'POST',
