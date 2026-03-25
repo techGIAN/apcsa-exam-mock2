@@ -394,6 +394,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       alert('Incorrect password, try again.');
     }
   }
+  alert(localStorage.getItem("examToken"));
 });
 
 /* ATTESTATION */
@@ -421,7 +422,7 @@ setInterval(() => {
    FINAL SUBMIT
 --------------------------------*/
 document.getElementById('submit-btn').addEventListener('click', async () => {
-  alert(localStorage.getItem("examToken"));
+  
   const token = localStorage.getItem("examToken");
   if (!token) return alert('No valid token.');
 
