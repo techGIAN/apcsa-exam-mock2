@@ -104,4 +104,11 @@ app.get('/admin/download', (req, res) => {
   res.download(submissionsFile, 'submissions.json');
 });
 
+// Admin endpoint to download saves.json
+app.get('/admin/download-saves', (req, res) => {
+  const submissionsFile = path.join(__dirname, 'saves.json');
+  if (!fs.existsSync(submissionsFile)) return res.status(404).send('No saved work yet');
+  res.download(submissionsFile, 'saves.json');
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
