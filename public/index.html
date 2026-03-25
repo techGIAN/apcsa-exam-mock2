@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AP CS A - Mock Exam 2 Free Response Submission</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+  .tab {
+  background: #fff;          /* all tabs white */
+  color: #333;
+  border: 1px solid #ccc;    /* default border */
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.tab.active {
+  border: 2px solid #28a745; /* green border for active tab */
+}
+ .tab.disabled { background: #ddd; color: #777; cursor: not-allowed; }
+  /* .tab {
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+ 
+  .tab.active { background: #ccc; color: white; } */
+
+  .checkmark { color: green; font-weight: bold; margin-left: 6px; }
+
+  .section { display: none; }
+  .active-section { display: block; }
+
+  textarea { width: 100%; height: 300px; margin-top: 10px; font-family: monospace; font-size: 14px; }
+  .large { height: 400px; }
+
+  /* Green Buttons */
+  button.green {
+    background: #28a745;
+    color: white;
+    padding: 12px 26px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.green:hover { background: #218838; }
+  button.green:disabled { background: #9acfa3; cursor: not-allowed; }
+
+  /* Toast message */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .instructions { margin: 15px 0; font-size: 14px; line-height: 1.5; }
+  .instructions strong { color: red; }
+  .instructions .highlight { color: red; font-weight: bold; }
+
+  .question-text {
+  background: #fffefe;
+  padding: 12px;
+  border-left: 4px solid #28a745;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.question-text code {
+  font-family: monospace;
+}
+/*
+pre {
+  margin: 2px 0;
+  padding: 4px 6px;
+  line-height: 1.2;
+}
+  */
+  pre {
+  margin: 4px 0 !important;      /* Tight vertical margin */
+  padding: 4px !important;        /* Small internal padding */
+  border-radius: 6px;             /* Optional */
+  background: #f7f7f7;            /* Optional light background */
+}
+
+pre code {
+  padding: 0 !important;          /* Remove double padding */
+}
+
+pre, code {
+  font-family: monospace !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;   /* Optional; helps reduce vertical height */
+}
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+</head>
+<body>
+<h2>AP CS A - Mock Exam 2 Free Response Submission</h2>
+<h4>[March 28th, 2026]</h4>
+
+<div class="tabs">
+  <div class="tab active" data-tab="home">Home</div>
+  <div class="tab disabled" data-tab="q1">Question 1</div>
+  <div class="tab disabled" data-tab="q2">Question 2</div>
+  <div class="tab disabled" data-tab="q3">Question 3</div>
+  <div class="tab disabled" data-tab="q4">Question 4</div>
+  <div class="tab disabled" data-tab="submit">Submit</div>
+</div>
+
+<!-- HOME TAB -->
+<div id="home" class="section active-section">
+  <h3>Enter Your Full Name</h3>
+  <input type="text" id="student-name" style="font-size:16px; padding:6px; width:50%;" />
+  <br><br>
+  <div class="instructions">
+    <span class="highlight">READ CAREFULLY THESE INSTRUCTIONS BEFORE STARTING WITH THIS SECTION OF THE EXAM</span><br>
+    <ol>
+      <li>Make sure to write your full name above.</li>
+      <li>Once ready, click on the button below to begin.</li>
+      <li>Use the exam tabs above to navigate through the questions, which you may do in any order.</li>
+      <li><span class="highlight">DO NOT click "Back", "Refresh" or close the browser window/tab at any time until you have clicked "Submit" on the last exam tab.</span></li>
+      <li>Ensure you click on "Save & Next" for each question that you solve - you will see a check mark beside the question number, indicating that you have solved it. </li>
+      <li>You may submit your work multiple times, but only the last submission will count.</li>
+      <li>Once you finish ahead of time, review your answers and click "Submit". If there is extra time left, you can review, revise and resubmit your work.</li>
+      <li><span class="highlight">Once you have submitted, message your teacher on the Zoom chat to get a confirmation that your work has been received before closing tabs and windows. IF IT HAS NOT BEEN RECEIVED, please await for his instructions. </span></li>
+      <li><i>Suggestion: You don't have to, but for the sanity of not losing work when there's a power outage or internet interruption, you can copy the codes and paste them to a Word document or Notepad, and "Save them" as you go along the exam.</i></li>
+    </ol>
+  </div>
+
+  <button id="start-btn" class="green" disabled>Go to Questions</button>
+</div>
+
+<!-- QUESTION 1 -->
+<div id="q1" class="section">
+  <h2>Question 1 - <span style="font-family: monospace;">Username</span> Class</h2>
+  The full question is on Classkick. Make sure to include method/constructor/class headers in your solutions.
+  <h3>Question 1a</h3>
+  <div class="question-text">
+    Write the <code class="language-java">isValid</code> method <b>[4 points]</b>.
+    <br><br>
+    <pre><code class="language-java">public boolean isValid(String username)</code></pre>
+  </div>
+  <textarea id="q1a"></textarea>
+  <h3>Question 1b</h3>
+  <div class="question-text">
+    Write the <code class="language-java">generateUsername</code> method <b>[3 points]</b>.
+    <br><br>
+    <pre><code class="language-java">public String generateUsrname()</code></pre>
+  </div>
+  <textarea id="q1b"></textarea>
+  <br><br>
+  <button class="green" onclick="saveWork('q1'); goToTab('q2')">Save & Next</button>
+</div>
+
+<!-- QUESTION 2 -->
+<div id="q2" class="section">
+  <h2>Question 2 - <span style="font-family: monospace;">Trajectory</span> Class</h2>
+  The full question is on Classkick. Make sure to include method/constructor/class headers in your solutions.
+  <div class="question-text">
+    Write the complete <code>Trajectory</code> class based on the specification as described on the question found on Classkick <b>[7 points]</b>.
+  </div>
+  <textarea id="q2text" class="large"></textarea>
+  <br><br>
+  <button class="green" onclick="saveWork('q2'); goToTab('q3')">Save & Next</button>
+</div>
+
+<!-- QUESTION 3 -->
+<div id="q3" class="section">
+  <h2>Question 3 - <span style="font-family: monospace;">PrimeFactorization</span> Class</h2>
+  The full question is on Classkick. Make sure to include method/constructor/class headers in your solutions.
+  <h3>Question 3a</h3>
+  <div class="question-text">
+    Write the constructor for the <code class="language-java">PrimeFactorization</code> class <b>[3 points]</b>.
+    <br><br>
+    <pre><code class="language-java">public PrimeFactorization(int num)</code></pre>
+  </div>
+  <textarea id="q3a"></textarea>
+  <h3>Question 3b</h3>
+  <div class="question-text">
+    Write the <code class="language-java">compareUniquePrimeFactorCount</code> method <b>[2 points]</b>.
+    <br><br>
+    <pre><code class="language-java">public int compareUniquePrimeFactorCount(PrimeFactorization other)</code></pre>
+  </div>
+  <textarea id="q3b"></textarea>
+  <br><br>
+  <button class="green" onclick="saveWork('q3'); goToTab('q4')">Save & Next</button>
+</div>
+
+<!-- QUESTION 4 -->
+<div id="q4" class="section">
+  <h2>Question 4 - <span style="font-family: monospace;">Auditorium</span> Class</h2>
+  The full question is on Classkick. Make sure to include method/constructor/class headers in your solutions.
+  <div class="question-text">
+    Write the <code>nextPreferredSeat</code> method <b>[6 points]</b>.
+  </div>
+  <textarea id="q4text" class="large"></textarea>
+  <br><br>
+  <button class="green" onclick="saveWork('q4'); goToTab('submit')">Save & Next</button>
+</div>
+
+<!-- SUBMIT TAB -->
+<div id="submit" class="section">
+  <h3>Attestation</h3>
+  <p id="attestation" style="font-size:15px; line-height:1.5;"></p>
+  <button id="submit-btn" class="green">Submit</button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let saved = { q1:false, q2:false, q3:false, q4:false };
+let token = null;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = 1;
+  setTimeout(() => t.style.opacity = 0, 2500);
+}
+
+function goToTab(tab) {
+  const name = document.getElementById('student-name').value.trim();
+  if (!name && tab !== "home") return;
+
+  document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active-section'));
+  document.getElementById(tab).classList.add('active-section');
+
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+
+  updateAttestation();
+}
+
+/* HOME TAB LOGIC */
+document.getElementById('student-name').addEventListener('input', () => {
+  const name = document.getElementById('student-name').value.trim();
+  document.getElementById('start-btn').disabled = name === "";
+});
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  const name = document.getElementById('student-name').value.trim();
+  if (!name) return;
+
+  document.getElementById('student-name').readOnly = true;
+  document.getElementById('start-btn').disabled = true;
+
+  /* Enable all tabs */
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('disabled'));
+
+  /* Make tabs clickable now */
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      if (!t.classList.contains('disabled')) {
+        goToTab(t.dataset.tab);
+      }
+    });
+  });
+
+  goToTab('q1');
+});
+
+/* -------------------------------
+   TAB KEY HANDLER
+--------------------------------*/
+function addTabHandler(textarea) {
+  textarea.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + "  " + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 2;
+    }
+  });
+}
+['q1a','q1b','q2text','q3a','q3b','q4text'].forEach(id => {
+  addTabHandler(document.getElementById(id));
+});
+
+/* CHECKMARK HANDLING */
+function updateCheckmarks() {
+  const labels = { q1:"Question 1", q2:"Question 2", q3:"Question 3", q4:"Question 4" };
+
+  ['q1','q2','q3','q4'].forEach(q => {
+    const tab = document.querySelector(`[data-tab="${q}"]`);
+    tab.innerHTML = labels[q] + (saved[q] ? ' <span class="checkmark">✓</span>' : '');
+  });
+}
+
+/* SAVE WORK */
+function saveWork(section) {
+  saved[section] = true;
+  updateCheckmarks();
+  showToast("Saved!");
+}
+
+/* PASSWORD CHECK */
+window.addEventListener('DOMContentLoaded', async () => {
+  while (!token) {
+    const pwd = prompt('Enter exam password:');
+    if (pwd === null) continue;
+    const res = await fetch('/verify-password', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify({ password: pwd })
+    });
+    const data = await res.json();
+    if (data.ok) token = data.token;
+    else alert('Incorrect password, try again.');
+  }
+});
+
+/* ATTESTATION */
+function updateAttestation() {
+  const name = document.getElementById('student-name').value.trim();
+  document.getElementById('attestation').innerHTML =
+    `I, <strong>${name}</strong>, affirm that all work submitted is entirely my own. ` +
+    `I have not used notes, textbooks, websites, AI systems, or received help from any 
+     other person. I understand that any violation of academic honesty policies may result 
+     in a failing grade or further disciplinary action`;
+}
+
+// /* FINAL SUBMIT */
+// document.getElementById('submit-btn').addEventListener('click', async () => {
+//   showToast("Submitted! You may still revise & resubmit until the time ends. Only the last submission counts!");
+// });
+
+/* -------------------------------
+   FINAL SUBMIT
+--------------------------------*/
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  if (!token) return alert('No valid token.');
+
+  const name = document.getElementById('student-name').value.trim();
+  const questions = {
+    '1a': document.getElementById('q1a').value,
+    '1b': document.getElementById('q1b').value,
+    '2': document.getElementById('q2text').value,
+    '3a': document.getElementById('q3a').value,
+    '3b': document.getElementById('q3b').value,
+    '4': document.getElementById('q4text').value
+  };
+
+  const res = await fetch('/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, name, questions })
+  });
+
+  const data = await res.json();
+  if (data.ok) showToast("Submitted! You may still revise & resubmit until the time ends. Only the last submission counts!");
+  else alert('Submission failed: ' + (data.error || 'Unknown error'));
+});
+</script>
+</body>
+</html>
