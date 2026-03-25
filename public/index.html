@@ -327,7 +327,7 @@ async function saveWork(section) {
     '4': document.getElementById('q4text').value
   };
 
-  await fetch('/saves', {
+  await fetch('/save', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ token, name, questions })

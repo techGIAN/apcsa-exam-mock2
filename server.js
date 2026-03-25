@@ -104,6 +104,24 @@ app.get('/admin/download', (req, res) => {
   res.download(submissionsFile, 'submissions.json');
 });
 
+// Submit endpoint
+app.post('/save', (req, res) => {
+  const { token, name, questions } = req.body;
+  if (!validTokens.has(token)) return res.json({ ok: false, error: 'Invalid token' });
+
+  // Save submission to submissions.json
+  const submissionsFile = path.join(__dirname, 'submissions.json');
+  let submissions = [];
+  if (fs.existsSync(submissionsFile)) {
+    submissions = JSON.parse(fs.readFileSync(submissionsFile, 'utf8'));
+  }
+  const entry = { name, time: new Date().toISOString(), questions };
+  submissions.push(entry);
+  fs.writeFileSync(submissionsFile, JSON.stringify(submissions, null, 2));
+
+  res.json({ ok: true });
+});
+
 // Admin endpoint to download saves.json
 app.get('/admin/download-saves', (req, res) => {
   const submissionsFile = path.join(__dirname, 'saves.json');
