@@ -334,6 +334,7 @@ async function saveWork(section) {
   });
 
   saved[section] = true;
+  updateCheckmarks();
   showToast("Saved!");
 }
 
