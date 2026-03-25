@@ -228,7 +228,7 @@ pre, code {
 
 <script>
 let saved = { q1:false, q2:false, q3:false, q4:false };
-let token = localStorage.getItem("examToken") || null;
+// let token = localStorage.getItem("examToken") || null;
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -394,7 +394,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       alert('Incorrect password, try again.');
     }
   }
-  alert(localStorage.getItem("examToken"));
+  // alert(localStorage.getItem("examToken"));
 });
 
 /* ATTESTATION */
@@ -415,6 +415,7 @@ function updateAttestation() {
 
 /* ------------------ AUTO SAVE ------------------ */
 setInterval(() => {
+  const token = localStorage.getItem("examToken");
   if (token) saveWork("autosave");
 }, 60000);
 
@@ -445,8 +446,8 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   const data = await res.json();
   if (data.ok) showToast("Submitted! You may still revise & resubmit until the time ends. Only the last submission counts!");
   else {
-    // alert('Submission failed: ' + (data.error || 'Unknown error'));
-    alert('Submission failed: ' + token);
+    alert('Submission failed: ' + (data.error || 'Unknown error'));
+    // alert('Submission failed: ' + token);
   }
 });
 </script>
