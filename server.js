@@ -27,6 +27,58 @@ app.post('/verify-password', (req, res) => {
   }
 });
 
+// Store ongoing work (NOT final submissions)
+const saveFile = path.join(__dirname, 'saves.json');
+
+// SAVE (partial save)
+app.post('/save', (req, res) => {
+  const { token, name, questions } = req.body;
+  if (!validTokens.has(token)) {
+    return res.json({ ok: false, error: 'Invalid token' });
+  }
+
+  let saves = {};
+  if (fs.existsSync(saveFile)) {
+    saves = JSON.parse(fs.readFileSync(saveFile, 'utf8'));
+  }
+
+  // Merge existing + new
+  if (!saves[token]) {
+    saves[token] = { name, questions: {} };
+  }
+
+  saves[token].name = name;
+  saves[token].questions = {
+    ...saves[token].questions,
+    ...questions
+  };
+
+  fs.writeFileSync(saveFile, JSON.stringify(saves, null, 2));
+
+  res.json({ ok: true });
+});
+
+// GET saved work
+app.get('/get', (req, res) => {
+  const { token } = req.query;
+  if (!validTokens.has(token)) {
+    return res.json({ ok: false, error: 'Invalid token' });
+  }
+
+  if (!fs.existsSync(saveFile)) {
+    return res.json({ ok: true, questions: {} });
+  }
+
+  const saves = JSON.parse(fs.readFileSync(saveFile, 'utf8'));
+  const data = saves[token];
+
+  res.json({
+    ok: true,
+    name: data?.name || "",
+    questions: data?.questions || {}
+  });
+});
+
 // Submit endpoint
 app.post('/submit', (req, res) => {
   const { token, name, questions } = req.body;

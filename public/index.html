@@ -226,7 +226,7 @@ pre, code {
 
 <script>
 let saved = { q1:false, q2:false, q3:false, q4:false };
-let token = null;
+let token = localStorage.getItem("examToken") || null;
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -305,10 +305,63 @@ function updateCheckmarks() {
 }
 
 /* SAVE WORK */
-function saveWork(section) {
+// function saveWork(section) {
+//   saved[section] = true;
+//   updateCheckmarks();
+//   showToast("Saved!");
+// }
+
+async function saveWork(section) {
+  if (!token) return;
+
+  const name = document.getElementById('student-name').value.trim();
+
+  const questions = {
+    '1a': document.getElementById('q1a').value,
+    '1b': document.getElementById('q1b').value,
+    '2': document.getElementById('q2text').value,
+    '3a': document.getElementById('q3a').value,
+    '3b': document.getElementById('q3b').value,
+    '4': document.getElementById('q4text').value
+  };
+
+  await fetch('/save', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ token, name, questions })
+  });
+
   saved[section] = true;
-  updateCheckmarks();
   showToast("Saved!");
+}
+
+/* ------------------ LOAD ------------------ */
+async function loadSavedWork() {
+  if (!token) return;
+
+  const res = await fetch(`/get?token=${token}`);
+  const data = await res.json();
+
+  if (!data.ok) return;
+
+  if (data.name) {
+    document.getElementById('student-name').value = data.name;
+    document.getElementById('student-name').readOnly = true;
+    document.getElementById('start-btn').disabled = true;
+
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('disabled'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.onclick = () => goToTab(t.dataset.tab);
+    });
+  }
+
+  const q = data.questions || {};
+  if (q['1a']) document.getElementById('q1a').value = q['1a'];
+  if (q['1b']) document.getElementById('q1b').value = q['1b'];
+  if (q['2']) document.getElementById('q2text').value = q['2'];
+  if (q['3a']) document.getElementById('q3a').value = q['3a'];
+  if (q['3b']) document.getElementById('q3b').value = q['3b'];
+  if (q['4']) document.getElementById('q4text').value = q['4'];
 }
 
 /* PASSWORD CHECK */
@@ -316,14 +369,25 @@ window.addEventListener('DOMContentLoaded', async () => {
   while (!token) {
     const pwd = prompt('Enter exam password:');
     if (pwd === null) continue;
+
     const res = await fetch('/verify-password', {
       method: 'POST',
       headers: { 'Content-Type':'application/json' },
       body: JSON.stringify({ password: pwd })
     });
+
     const data = await res.json();
-    if (data.ok) token = data.token;
-    else alert('Incorrect password, try again.');
+
+    if (data.ok) {
+      token = data.token;
+
+      // ✅ ADD THIS LINE
+      localStorage.setItem("examToken", token);
+
+      await loadSavedWork();
+    } else {
+      alert('Incorrect password, try again.');
+    }
   }
 });
 
@@ -341,6 +405,12 @@ function updateAttestation() {
 // document.getElementById('submit-btn').addEventListener('click', async () => {
 //   showToast("Submitted! You may still revise & resubmit until the time ends. Only the last submission counts!");
 // });
+
+
+/* ------------------ AUTO SAVE ------------------ */
+setInterval(() => {
+  if (token) saveWork("autosave");
+}, 15000);
 
 /* -------------------------------
    FINAL SUBMIT
